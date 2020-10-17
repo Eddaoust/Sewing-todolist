@@ -1,6 +1,5 @@
 import React from 'react';
-import {View, ImageBackground, Text, StyleSheet} from "react-native";
-import {} from 'native-base';
+import {View, ImageBackground, StyleSheet} from "react-native";
 import TidyButton from "../../components/TidyButton";
 
 const WelcomeScreen = props => {
@@ -8,11 +7,8 @@ const WelcomeScreen = props => {
     return (
         <View style={styles.container}>
             <ImageBackground
-                source={require('../../assets/login1.png')}
+                source={require('../../assets/scene_hello.png')}
                 style={styles.bgImage}>
-                <View style={styles.titleContainer}>
-                    <Text style={styles.title}>BIENVENUE</Text>
-                </View>
             </ImageBackground>
             <View style={styles.btnContainer}>
                 <TidyButton onPress={() => {
@@ -28,6 +24,8 @@ const WelcomeScreen = props => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        paddingTop: 80,
+        backgroundColor: '#FEFCFC',
     },
     bgImage: {
         flex: 1,
@@ -38,19 +36,7 @@ const styles = StyleSheet.create({
         height: 100,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#FEFCFC',
-    },
-    titleContainer: {
-        backgroundColor: 'rgba(254, 252, 252, 0)',
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginVertical: 120
-    },
-    title: {
-        fontSize: 32,
-        fontWeight: 'bold',
-        color: '#F4D1D1',
-        textAlign: 'center'
+        marginBottom: 30,
     }
 });
 
