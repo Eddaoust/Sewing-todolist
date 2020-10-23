@@ -30,7 +30,7 @@ const LoginChoiceScreen = props => {
                 <Text style={styles.panelBottomtext}>Déja inscrit(e)? </Text>
                 <TouchableOpacity
                     activeOpacity={0.6}
-                    onPress={() => sheetRef.current.snapTo(0)}>
+                    onPress={() => props.navigation.navigate('LoginScreen')}>
                     <Text style={styles.panelBottomLink}>S'identifier</Text>
                 </TouchableOpacity>
             </View>
