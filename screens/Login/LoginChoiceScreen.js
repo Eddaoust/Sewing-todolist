@@ -1,6 +1,7 @@
 import React from 'react';
 import {StyleSheet, View, Text, ImageBackground, Image, TouchableOpacity} from 'react-native';
 import IconButton from "../../components/IconButton";
+import TidyButton from "../../components/TidyButton";
 import {FontAwesome, Fontisto} from '@expo/vector-icons';
 import Animated from 'react-native-reanimated';
 import BottomSheet from 'reanimated-bottom-sheet';
@@ -18,13 +19,21 @@ const LoginChoiceScreen = props => {
     );
 
     const renderContent = () => (
-        <View
-            style={{
-                backgroundColor: 'white',
-                padding: 16,
-                height: 450,
-            }}>
-            <Text>Swipe down to close</Text>
+        <View style={styles.panel}>
+            <TidyButton>
+                <View style={styles.panelBtnContainer}>
+                    <Fontisto name="email" size={26} color="white" style={styles.panelBtnIcon} />
+                    <Text style={styles.panelBtnText}>S'INSCRIRE AVEC UN EMAIL</Text>
+                </View>
+            </TidyButton>
+            <View style={styles.panelBottomTextContainer}>
+                <Text style={styles.panelBottomtext}>Déja inscrit(e)? </Text>
+                <TouchableOpacity
+                    activeOpacity={0.6}
+                    onPress={() => sheetRef.current.snapTo(0)}>
+                    <Text style={styles.panelBottomLink}>S'identifier</Text>
+                </TouchableOpacity>
+            </View>
         </View>
     );
 
@@ -32,11 +41,11 @@ const LoginChoiceScreen = props => {
         <View style={styles.container}>
             <BottomSheet
                 ref={sheetRef}
-                snapPoints={[450, 0]}
+                snapPoints={[300, 0]}
                 initialSnap={1}
                 callbackNode={fall}
-                borderRadius={10}
                 enabledGestureInteraction={true}
+                enabledInnerScrolling={false}
                 renderContent={renderContent}
                 renderHeader={renderHeader}
             />
@@ -55,7 +64,10 @@ const LoginChoiceScreen = props => {
                         <Fontisto name="apple" size={26} color="white" style={{marginTop: -4}} />
                     </IconButton>
                 </View>
-                <TouchableOpacity activeOpacity={0.6} onPress={() => sheetRef.current.snapTo(0)}>
+                <TouchableOpacity
+                    style={styles.otherButton}
+                    activeOpacity={0.6}
+                    onPress={() => sheetRef.current.snapTo(0)}>
                     <Text style={styles.options}>AUTRES OPTIONS</Text>
                 </TouchableOpacity>
             </ImageBackground>
@@ -66,7 +78,6 @@ const LoginChoiceScreen = props => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        //paddingTop: 80,
     },
     bgImage: {
         flex: 1,
@@ -86,7 +97,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         alignItems: 'center',
         position: 'relative',
-        top: 400
+        top: 420
     },
     fbButton: {
         backgroundColor: '#3B5998'
@@ -101,9 +112,11 @@ const styles = StyleSheet.create({
     appleButton: {
         backgroundColor: '#000000'
     },
-    options: {
+    otherButton: {
         position: 'relative',
         top: 450,
+    },
+    options: {
         color: '#A07B7B',
         fontFamily: 'josefin-sans-semi-bold',
         fontSize: 15
@@ -114,10 +127,9 @@ const styles = StyleSheet.create({
         shadowOffset: {width: -1, height: -3},
         shadowRadius: 2,
         shadowOpacity: 0.4,
-        // elevation: 5,
         paddingTop: 20,
-        borderTopLeftRadius: 20,
-        borderTopRightRadius: 20,
+        borderTopLeftRadius: 30,
+        borderTopRightRadius: 30,
     },
     panelHeader: {
         alignItems: 'center',
@@ -129,6 +141,42 @@ const styles = StyleSheet.create({
         backgroundColor: '#00000040',
         marginBottom: 10,
     },
+    panel: {
+        backgroundColor: 'white',
+        padding: 16,
+        height: 320,
+        paddingTop: 50,
+        alignItems: 'center'
+    },
+    panelBtnContainer: {
+        width: '100%',
+        flexDirection: 'row',
+        justifyContent: 'space-evenly',
+        alignItems: 'center',
+        paddingHorizontal: 40,
+        paddingVertical: 20,
+    },
+    panelBtnIcon: {
+        marginTop: -4
+    },
+    panelBtnText: {
+        fontFamily: 'poppins-semi-bold',
+        fontSize: 16,
+        color: 'white',
+    },
+    panelBottomTextContainer: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        marginTop: 20
+    },
+    panelBottomtext:{
+        color: '#BEBEBE',
+        fontFamily: 'poppins-light'
+    },
+    panelBottomLink: {
+        color: '#F4D1D1',
+        fontFamily: 'poppins-light'
+    }
 });
 
 export default LoginChoiceScreen;

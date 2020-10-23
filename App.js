@@ -11,10 +11,12 @@ import AppNavigator from "./navigation/AppNavigator";
 
 const store = createStore(reducer, applyMiddleware(thunkMiddleware));
 
-const fetchFonts = () => {
-    Font.loadAsync({
+const fetchFonts = async () => {
+    await Font.loadAsync({
         'josefin-sans': require('./assets/fonts/JosefinSans-Regular.ttf'),
-        'josefin-sans-semi-bold': require('./assets/fonts/JosefinSans-SemiBold.ttf')
+        'josefin-sans-semi-bold': require('./assets/fonts/JosefinSans-SemiBold.ttf'),
+        'poppins-semi-bold': require('./assets/fonts/Poppins-SemiBold.otf'),
+        'poppins-light': require('./assets/fonts/Poppins-Light.otf'),
     });
 };
 
