@@ -20,7 +20,7 @@ const LoginChoiceScreen = props => {
 
     const renderContent = () => (
         <View style={styles.panel}>
-            <TidyButton>
+            <TidyButton onPress={() => props.navigation.navigate('RegistrationScreen')}>
                 <View style={styles.panelBtnContainer}>
                     <Fontisto name="email" size={26} color="white" style={styles.panelBtnIcon} />
                     <Text style={styles.panelBtnText}>S'INSCRIRE AVEC UN EMAIL</Text>

@@ -1,8 +1,8 @@
 import React from 'react';
-import {ImageBackground, StyleSheet, Text, View, TextInput, KeyboardAvoidingView} from 'react-native';
+import {StyleSheet, View, KeyboardAvoidingView, ImageBackground, Text, TextInput} from 'react-native';
 import TidyButton from "../../components/TidyButton";
 
-const LoginScreen = props => {
+const RegistrationScreen = props => {
 
     return (
         <KeyboardAvoidingView
@@ -12,8 +12,23 @@ const LoginScreen = props => {
             <ImageBackground
                 source={require('../../assets/back_leaf.png')}
                 style={styles.bgImage}>
-                <Text style={styles.title}>CONNEXION</Text>
+                <Text style={styles.title}>INSCRIPTION</Text>
                 <View style={styles.inputContainer}>
+                    <TextInput
+                        autoCorrect={false}
+                        style={styles.input}
+                        keyboardType="email-address"
+                        placeholder="Email"/>
+                    <TextInput
+                        autoCorrect={false}
+                        style={styles.input}
+                        keyboardType="email-address"
+                        placeholder="Email"/>
+                    <TextInput
+                        autoCorrect={false}
+                        style={styles.input}
+                        keyboardType="email-address"
+                        placeholder="Email"/>
                     <TextInput
                         autoCorrect={false}
                         style={styles.input}
@@ -24,7 +39,7 @@ const LoginScreen = props => {
                         style={styles.input}/>
                     <TidyButton>
                         <View style={styles.btnContainer}>
-                            <Text style={styles.btnLabel}>SE CONNECTER</Text>
+                            <Text style={styles.btnLabel}>VALIDER</Text>
                         </View>
                     </TidyButton>
                 </View>
@@ -80,4 +95,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default LoginScreen;
+export default RegistrationScreen;
