@@ -39,11 +39,9 @@ const LoginScreen = props => {
                     <TextInput
                         placeholder="Mot de passe"
                         style={styles.input}/>
-                    <TidyButton onPress={handleSubmit(onSubmit)}>
-                        <View style={styles.btnContainer}>
-                            <Text style={styles.btnLabel}>SE CONNECTER</Text>
-                        </View>
-                    </TidyButton>
+                    <TidyButton
+                        label="SE CONNECTER"
+                        onPress={handleSubmit(onSubmit)}/>
                 </View>
             </ImageBackground>
         </KeyboardAvoidingView>

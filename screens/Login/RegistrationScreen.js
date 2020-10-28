@@ -37,11 +37,7 @@ const RegistrationScreen = props => {
                     <TextInput
                         placeholder="Mot de passe"
                         style={styles.input}/>
-                    <TidyButton>
-                        <View style={styles.btnContainer}>
-                            <Text style={styles.btnLabel}>VALIDER</Text>
-                        </View>
-                    </TidyButton>
+                    <TidyButton label="VALIDER"/>
                 </View>
             </ImageBackground>
         </KeyboardAvoidingView>

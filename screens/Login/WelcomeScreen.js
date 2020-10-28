@@ -1,6 +1,11 @@
 import React from 'react';
-import {View, ImageBackground, StyleSheet, Text} from "react-native";
+import {View, ImageBackground, StyleSheet, Dimensions} from "react-native";
 import TidyButton from "../../components/TidyButton";
+
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
+console.log('WIDTH: '+ windowWidth);
+console.log('HEIGHT: '+ windowHeight);
 
 const WelcomeScreen = props => {
 
@@ -11,11 +16,11 @@ const WelcomeScreen = props => {
                 style={styles.bgImage}>
             </ImageBackground>
             <View style={styles.btnContainer}>
-                <TidyButton style={styles.buttonSize} onPress={() => {
+                <TidyButton
+                    label="LET'S SEW"
+                    onPress={() => {
                     props.navigation.navigate('LoginChoiceScreen');
-                }}>
-                    <Text style={styles.buttonText}>LET'S SEW</Text>
-                </TidyButton>
+                }}/>
             </View>
         </View>
     );
@@ -24,29 +29,17 @@ const WelcomeScreen = props => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingTop: 80,
+        paddingTop: windowHeight <= 685 ? 25 : 80,
         backgroundColor: '#FEFCFC',
     },
     bgImage: {
-        flex: 1,
+        flex: 4,
         resizeMode: "cover",
-        justifyContent: "flex-start",
     },
     btnContainer: {
-        height: 100,
+        flex: 1,
         justifyContent: 'center',
-        alignItems: 'center',
-        marginBottom: 30,
-    },
-    buttonText: {
-        color: 'white',
-        fontSize: 18,
-        textAlign: 'center',
-        fontFamily: 'poppins-semi-bold'
-    },
-    buttonSize: {
-        paddingVertical: 15,
-        paddingHorizontal: 100
+        alignItems: 'center'
     }
 });
 
