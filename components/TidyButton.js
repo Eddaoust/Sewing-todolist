@@ -6,11 +6,10 @@ const TidyButton = props => {
     if (props.icon !== '') {
         iconStyle = {
             flexDirection: 'row',
-            justifyContent: 'space-evenly',
+            justifyContent: 'center',
             alignItems: 'center',
         }
     }
-
 
     return (
         <TouchableOpacity activeOpacity={0.6} onPress={props.onPress}>
@@ -25,6 +24,7 @@ const TidyButton = props => {
 const styles = StyleSheet.create({
     button: {
         paddingVertical: 15,
+        paddingHorizontal: 15,
         width: Dimensions.get('window').width * 0.8,
         backgroundColor: '#F4D1D1',
         borderRadius: (Dimensions.get('window').width * 0.8) / 2,
@@ -36,9 +36,10 @@ const styles = StyleSheet.create({
     },
     buttonText: {
         color: 'white',
-        fontSize: 18,
+        fontSize: 16,
         textAlign: 'center',
-        fontFamily: 'poppins-semi-bold'
+        fontFamily: 'poppins-semi-bold',
+        paddingHorizontal: 5
     },
 });
 

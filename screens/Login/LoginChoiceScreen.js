@@ -25,7 +25,7 @@ const LoginChoiceScreen = props => {
         <View style={styles.modalBody}>
             <TidyButton
                 label="S'INSCRIRE AVEC UN EMAIL"
-                icon={<Fontisto name="email" size={26} color="white" style={styles.panelBtnIcon} />}
+                icon={<Fontisto name="email" size={20} color="white" style={styles.panelBtnIcon} />}
                 onPress={() => props.navigation.navigate('RegistrationScreen')}/>
             <View style={styles.panelBottomTextContainer}>
                 <Text style={styles.panelBottomtext}>Déja inscrit(e)? </Text>
@@ -69,6 +69,7 @@ const LoginChoiceScreen = props => {
                 initialSnap={1}
                 callbackNode={fall}
                 enabledGestureInteraction={true}
+                enabledContentTapInteraction={false}
                 enabledInnerScrolling={false}
                 renderContent={renderContent}
                 renderHeader={renderHeader}
@@ -159,7 +160,7 @@ const styles = StyleSheet.create({
         paddingVertical: 20,
     },
     panelBtnIcon: {
-        marginTop: -4
+        marginTop: -2
     },
     panelBtnText: {
         fontFamily: 'poppins-semi-bold',
