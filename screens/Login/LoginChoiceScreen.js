@@ -1,25 +1,28 @@
 import React from 'react';
-import {StyleSheet, View, Text, ImageBackground, Image, TouchableOpacity} from 'react-native';
-import IconButton from "../../components/IconButton";
+import {StyleSheet, View, Text, ImageBackground, Image, TouchableOpacity, Dimensions} from 'react-native';
+import SocialButton from "../../components/SocialButton";
 import TidyButton from "../../components/TidyButton";
 import {FontAwesome, Fontisto} from '@expo/vector-icons';
 import Animated from 'react-native-reanimated';
 import BottomSheet from 'reanimated-bottom-sheet';
+
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 const LoginChoiceScreen = props => {
     const sheetRef = React.useRef(null);
     const fall = new Animated.Value(1);
 
     const renderHeader = () => (
-        <View style={styles.header}>
-            <View style={styles.panelHeader}>
-                <View style={styles.panelHandle} />
+        <View style={styles.modalHeader}>
+            <View style={styles.modalHeaderPanel}>
+                <View style={styles.modalHeaderHandle} />
             </View>
         </View>
     );
 
     const renderContent = () => (
-        <View style={styles.panel}>
+        <View style={styles.modalBody}>
             <TidyButton
                 label="S'INSCRIRE AVEC UN EMAIL"
                 icon={<Fontisto name="email" size={26} color="white" style={styles.panelBtnIcon} />}
@@ -37,9 +40,32 @@ const LoginChoiceScreen = props => {
 
     return (
         <View style={styles.container}>
+            <ImageBackground
+                source={require('../../assets/back_leaf.png')}
+                style={styles.bgImage}>
+                <Text style={styles.title}>CONNEXION</Text>
+                <View style={styles.actionContainer}>
+                    <View style={styles.socialContainer}>
+                        <SocialButton style={styles.fbButton}>
+                            <FontAwesome name="facebook" size={28} color="white" style={{marginTop: 4}} />
+                        </SocialButton>
+                        <SocialButton style={styles.googleButton}>
+                            <Image source={require('../../assets/google.png')} style={styles.googleLogo}/>
+                        </SocialButton>
+                        <SocialButton style={styles.appleButton}>
+                            <Fontisto name="apple" size={26} color="white" style={{marginTop: -4}} />
+                        </SocialButton>
+                    </View>
+                    <TouchableOpacity
+                        activeOpacity={0.6}
+                        onPress={() => sheetRef.current.snapTo(0)}>
+                        <Text style={styles.options}>AUTRES OPTIONS</Text>
+                    </TouchableOpacity>
+                </View>
+            </ImageBackground>
             <BottomSheet
                 ref={sheetRef}
-                snapPoints={[300, 0]}
+                snapPoints={[windowHeight * 0.4, 0]}
                 initialSnap={1}
                 callbackNode={fall}
                 enabledGestureInteraction={true}
@@ -47,28 +73,6 @@ const LoginChoiceScreen = props => {
                 renderContent={renderContent}
                 renderHeader={renderHeader}
             />
-            <ImageBackground
-                source={require('../../assets/back_leaf.png')}
-                style={styles.bgImage}>
-                <Text style={styles.title}>CONNEXION</Text>
-                <View style={styles.btnContainer}>
-                    <IconButton style={styles.fbButton}>
-                        <FontAwesome name="facebook" size={28} color="white" style={{marginTop: 4}} />
-                    </IconButton>
-                    <IconButton style={styles.googleButton}>
-                        <Image source={require('../../assets/google.png')} style={styles.googleLogo}/>
-                    </IconButton>
-                    <IconButton style={styles.appleButton}>
-                        <Fontisto name="apple" size={26} color="white" style={{marginTop: -4}} />
-                    </IconButton>
-                </View>
-                <TouchableOpacity
-                    style={styles.otherButton}
-                    activeOpacity={0.6}
-                    onPress={() => sheetRef.current.snapTo(0)}>
-                    <Text style={styles.options}>AUTRES OPTIONS</Text>
-                </TouchableOpacity>
-            </ImageBackground>
         </View>
     );
 };
@@ -79,23 +83,26 @@ const styles = StyleSheet.create({
     },
     bgImage: {
         flex: 1,
-        resizeMode: "cover",
-        justifyContent: "flex-start",
+        resizeMode: 'cover',
         alignItems: 'center'
     },
     title: {
-        marginTop: 150,
+        flex: 3,
         textAlign: 'center',
         fontFamily: 'josefin-sans-semi-bold',
         fontSize: 33,
+        paddingTop:  windowHeight <= 685 ? 40 : 100,
     },
-    btnContainer: {
-        width: '50%',
+    actionContainer: {
+        flex: 1,
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        width: windowWidth * 0.5,
+    },
+    socialContainer: {
+        width: '100%',
         flexDirection: 'row',
         justifyContent: 'space-between',
-        alignItems: 'center',
-        position: 'relative',
-        top: 420
     },
     fbButton: {
         backgroundColor: '#3B5998'
@@ -110,16 +117,13 @@ const styles = StyleSheet.create({
     appleButton: {
         backgroundColor: '#000000'
     },
-    otherButton: {
-        position: 'relative',
-        top: 450,
-    },
     options: {
         color: '#A07B7B',
         fontFamily: 'josefin-sans-semi-bold',
-        fontSize: 15
+        fontSize: 15,
+        marginTop: windowHeight <= 685 ? 15 : 25
     },
-    header: {
+    modalHeader: {
         backgroundColor: '#FFFFFF',
         shadowColor: '#333333',
         shadowOffset: {width: -1, height: -3},
@@ -129,17 +133,17 @@ const styles = StyleSheet.create({
         borderTopLeftRadius: 30,
         borderTopRightRadius: 30,
     },
-    panelHeader: {
+    modalHeaderPanel: {
         alignItems: 'center',
     },
-    panelHandle: {
+    modalHeaderHandle: {
         width: 40,
         height: 8,
         borderRadius: 4,
         backgroundColor: '#00000040',
         marginBottom: 10,
     },
-    panel: {
+    modalBody: {
         backgroundColor: 'white',
         padding: 16,
         height: 320,

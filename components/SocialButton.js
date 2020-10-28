@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, View, TouchableOpacity} from 'react-native';
 
-const IconButton = props => {
+const SocialButton = props => {
 
     return (
         <TouchableOpacity activeOpacity={0.6} onPress={props.onPress}>
@@ -28,4 +28,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default IconButton;
+export default SocialButton;
