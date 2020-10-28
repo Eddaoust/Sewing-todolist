@@ -15,6 +15,7 @@ const InputErrorMessage = props => {
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
+        alignSelf: 'flex-start',
         paddingHorizontal: 8
     },
     message: {

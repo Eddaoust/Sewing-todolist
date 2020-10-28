@@ -148,8 +148,8 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         padding: 16,
         height: 320,
-        paddingTop: 50,
-        alignItems: 'center'
+        paddingTop: windowHeight <= 685 ? 50 : 75,
+        alignItems: 'center',
     },
     panelBtnContainer: {
         width: '100%',

@@ -1,13 +1,22 @@
 import React from 'react';
-import {ImageBackground, StyleSheet, Text, View, TextInput, KeyboardAvoidingView} from 'react-native';
-import {useForm, Controller} from "react-hook-form";
-import TidyButton from "../../components/TidyButton";
-import InputErrorMessage from "../../components/InputErrorMessage";
+import {ImageBackground, StyleSheet, Text, View, TextInput, KeyboardAvoidingView, Dimensions} from 'react-native';
+import {useForm, Controller} from 'react-hook-form';
+import { useHeaderHeight } from '@react-navigation/stack';
+import TidyButton from '../../components/TidyButton';
+import InputErrorMessage from '../../components/InputErrorMessage';
+
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 const LoginScreen = props => {
     const { control, handleSubmit, errors } = useForm();
     const onSubmit = data => console.log(data);
-    console.log(errors)
+    const headerHeight = useHeaderHeight();
+
+    const titlePosition = {
+        paddingTop:  windowHeight <= 685 ? (40 - headerHeight) : (100 - headerHeight)
+    }
+
     return (
         <KeyboardAvoidingView
             behavior="padding"
@@ -16,7 +25,7 @@ const LoginScreen = props => {
             <ImageBackground
                 source={require('../../assets/back_leaf.png')}
                 style={styles.bgImage}>
-                <Text style={styles.title}>CONNEXION</Text>
+                <Text style={{...styles.title, ...titlePosition}}>CONNEXION</Text>
                 <View style={styles.inputContainer}>
                     <Controller
                         control={control}
@@ -39,6 +48,8 @@ const LoginScreen = props => {
                     <TextInput
                         placeholder="Mot de passe"
                         style={styles.input}/>
+                </View>
+                <View style={styles.btnContainer}>
                     <TidyButton
                         label="SE CONNECTER"
                         onPress={handleSubmit(onSubmit)}/>
@@ -54,24 +65,30 @@ const styles = StyleSheet.create({
     },
     bgImage: {
         flex: 1,
-        resizeMode: "cover",
-        justifyContent: "flex-start",
+        resizeMode: 'cover',
         alignItems: 'center'
+        //justifyContent: 'flex-start',
+        //alignItems: 'center'
     },
     title: {
-        marginTop: 60,
+        flex: 2,
         textAlign: 'center',
         fontFamily: 'josefin-sans-semi-bold',
         fontSize: 33,
     },
     inputContainer: {
-        width: '100%',
-        paddingHorizontal: 20,
-        flex: 1,
-        justifyContent: 'flex-end',
-        marginBottom: 100
+        flex: 2,
+        width: windowWidth * 0.8,
+        justifyContent: 'flex-start',
+        alignItems: 'center'
+        //width: '100%',
+        //paddingHorizontal: 20,
+        //flex: 1,
+        //justifyContent: 'flex-end',
+        //marginBottom: 100
     },
     input: {
+        width: '100%',
         paddingHorizontal: 10,
         paddingVertical: 12,
         fontSize: 18,
@@ -83,16 +100,11 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff'
     },
     btnContainer: {
-        width: '100%',
-        paddingHorizontal: 40,
-        paddingVertical: 15,
+        flex: 1,
+        //width: '100%',
+        //paddingHorizontal: 40,
+        //paddingVertical: 15,
     },
-    btnLabel: {
-        color: 'white',
-        fontSize: 18,
-        textAlign: 'center',
-        fontFamily: 'poppins-semi-bold'
-    }
 });
 
 export default LoginScreen;
