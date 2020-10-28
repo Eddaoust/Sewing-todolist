@@ -163,6 +163,7 @@ const styles = StyleSheet.create({
         fontFamily: 'poppins-semi-bold',
         fontSize: 16,
         color: 'white',
+        paddingHorizontal: 10
     },
     panelBottomTextContainer: {
         flexDirection: 'row',

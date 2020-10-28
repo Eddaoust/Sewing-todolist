@@ -1,9 +1,13 @@
 import React from 'react';
 import {ImageBackground, StyleSheet, Text, View, TextInput, KeyboardAvoidingView} from 'react-native';
+import {useForm, Controller} from "react-hook-form";
 import TidyButton from "../../components/TidyButton";
+import InputErrorMessage from "../../components/InputErrorMessage";
 
 const LoginScreen = props => {
-
+    const { control, handleSubmit, errors } = useForm();
+    const onSubmit = data => console.log(data);
+    console.log(errors)
     return (
         <KeyboardAvoidingView
             behavior="padding"
@@ -14,15 +18,28 @@ const LoginScreen = props => {
                 style={styles.bgImage}>
                 <Text style={styles.title}>CONNEXION</Text>
                 <View style={styles.inputContainer}>
-                    <TextInput
-                        autoCorrect={false}
-                        style={styles.input}
-                        keyboardType="email-address"
-                        placeholder="Email"/>
+                    <Controller
+                        control={control}
+                        name="email"
+                        rules={{required: true}}
+                        defaultValue=""
+                        render={({onChange, onBlur, value}) => (
+                            <TextInput
+                                autoCorrect={false}
+                                style={styles.input}
+                                keyboardType="email-address"
+                                onBlur={onBlur}
+                                onChangeText={value => onChange(value)}
+                                value={value}
+                                placeholder="Email"/>
+                        )}
+                    />
+                    {errors.email && <InputErrorMessage message="This is required"/>}
+
                     <TextInput
                         placeholder="Mot de passe"
                         style={styles.input}/>
-                    <TidyButton>
+                    <TidyButton onPress={handleSubmit(onSubmit)}>
                         <View style={styles.btnContainer}>
                             <Text style={styles.btnLabel}>SE CONNECTER</Text>
                         </View>
