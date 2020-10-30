@@ -13,7 +13,10 @@ const AuthNavigator = props => {
             headerMode="screen"
             screenOptions={{
                 headerTintColor: 'black',
-                headerStyle: { backgroundColor: 'transparent' },
+                headerStyle: {
+                    backgroundColor: 'transparent',
+                    elevation: 0
+                },
             }}>
             <AuthStack.Screen
                 name="WelcomeScreen"
