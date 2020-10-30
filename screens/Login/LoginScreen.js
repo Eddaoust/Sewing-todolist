@@ -30,7 +30,13 @@ const LoginScreen = props => {
                     <Controller
                         control={control}
                         name="email"
-                        rules={{required: true}}
+                        rules={{
+                            required: 'Ce champ est requis!',
+                            pattern: {
+                                value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
+                                message: 'Entrez une adresse emai valide',
+                            }
+                        }}
                         defaultValue=""
                         render={({onChange, onBlur, value}) => (
                             <TextInput
@@ -43,10 +49,11 @@ const LoginScreen = props => {
                                 placeholder="Email"/>
                         )}
                     />
-                    {errors.email && <InputErrorMessage message="This is required"/>}
+                    {errors.email && <InputErrorMessage message={errors.email.message}/>}
 
                     <TextInput
                         placeholder="Mot de passe"
+                        secureTextEntry={true}
                         style={styles.input}/>
                 </View>
                 <View style={styles.btnContainer}>
