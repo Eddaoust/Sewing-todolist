@@ -1,5 +1,5 @@
-import React from 'react';
-import {ImageBackground, StyleSheet, Text, View, TextInput, KeyboardAvoidingView, Dimensions} from 'react-native';
+import React, {useState} from 'react';
+import {ImageBackground, StyleSheet, Text, View, TextInput, KeyboardAvoidingView, Dimensions, TouchableOpacity} from 'react-native';
 import {useForm, Controller} from 'react-hook-form';
 import { useHeaderHeight } from '@react-navigation/stack';
 import TidyButton from '../../components/TidyButton';
@@ -9,9 +9,12 @@ const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 const LoginScreen = props => {
+    //TODO Reset error on component mount
     const { control, handleSubmit, errors } = useForm();
     const onSubmit = data => console.log(data);
     const headerHeight = useHeaderHeight();
+    //TODO Implement this logic with API call
+    const [loginError, setLoginError] = useState(true);
 
     const titlePosition = {
         paddingTop:  windowHeight <= 685 ? (40 - headerHeight) : (100 - headerHeight)
@@ -41,25 +44,35 @@ const LoginScreen = props => {
                         render={({onChange, onBlur, value}) => (
                             <TextInput
                                 autoCorrect={false}
+                                returnKeyType='next'
                                 style={styles.input}
-                                keyboardType="email-address"
+                                keyboardType='email-address'
                                 onBlur={onBlur}
                                 onChangeText={value => onChange(value)}
                                 value={value}
-                                placeholder="Email"/>
+                                placeholder='Adresse email'/>
                         )}
                     />
                     {errors.email && <InputErrorMessage message={errors.email.message}/>}
 
                     <TextInput
-                        placeholder="Mot de passe"
+                        placeholder='Mot de passe'
+                        returnKeyType='send'
                         secureTextEntry={true}
                         style={styles.input}/>
+                    {loginError && <InputErrorMessage message='Login ou mot de passe incorrect'/>}
                 </View>
                 <View style={styles.btnContainer}>
                     <TidyButton
                         label="SE CONNECTER"
                         onPress={handleSubmit(onSubmit)}/>
+                    <View style={styles.forgotPassword}>
+                        <TouchableOpacity
+                            activeOpacity={0.6}
+                            onPress={() => {}}>
+                            <Text style={styles.forgotPasswordText}>Mot de passe oublié?</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
             </ImageBackground>
         </KeyboardAvoidingView>
@@ -74,8 +87,6 @@ const styles = StyleSheet.create({
         flex: 1,
         resizeMode: 'cover',
         alignItems: 'center'
-        //justifyContent: 'flex-start',
-        //alignItems: 'center'
     },
     title: {
         flex: 2,
@@ -88,30 +99,30 @@ const styles = StyleSheet.create({
         width: windowWidth * 0.8,
         justifyContent: 'flex-start',
         alignItems: 'center'
-        //width: '100%',
-        //paddingHorizontal: 20,
-        //flex: 1,
-        //justifyContent: 'flex-end',
-        //marginBottom: 100
     },
     input: {
         width: '100%',
         paddingHorizontal: 10,
         paddingVertical: 12,
         fontSize: 18,
-        borderColor: '#cacaca',
+        borderColor: '#F4D1D1',
         borderWidth: 1,
-        borderRadius: 20,
+        borderRadius: (windowWidth * 0.8) / 2,
         fontFamily: 'poppins-light',
         marginVertical: 8,
         backgroundColor: '#fff'
     },
     btnContainer: {
         flex: 1,
-        //width: '100%',
-        //paddingHorizontal: 40,
-        //paddingVertical: 15,
+        alignItems: 'center'
     },
+    forgotPassword: {
+      marginTop: 10
+    },
+    forgotPasswordText: {
+        color: '#c3a7a7',
+        fontFamily: 'poppins-light'
+    }
 });
 
 export default LoginScreen;
