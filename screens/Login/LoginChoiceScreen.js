@@ -93,12 +93,13 @@ const styles = StyleSheet.create({
         fontFamily: 'josefin-sans-semi-bold',
         fontSize: 33,
         paddingTop:  windowHeight <= 685 ? 40 : 100,
+        color: '#35433A'
     },
     actionContainer: {
-        flex: 1,
+        flex: 2,
         justifyContent: 'flex-start',
         alignItems: 'center',
-        width: windowWidth * 0.5,
+        width: windowWidth * 0.6,
     },
     socialContainer: {
         width: '100%',
@@ -122,7 +123,7 @@ const styles = StyleSheet.create({
         color: '#A07B7B',
         fontFamily: 'josefin-sans-semi-bold',
         fontSize: 15,
-        marginTop: windowHeight <= 685 ? 15 : 25
+        marginTop: windowHeight <= 685 ? 20 : 30
     },
     modalHeader: {
         backgroundColor: '#FFFFFF',

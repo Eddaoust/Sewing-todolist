@@ -2,10 +2,7 @@ import React from 'react';
 import {View, ImageBackground, StyleSheet, Dimensions} from "react-native";
 import TidyButton from "../../components/TidyButton";
 
-const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
-console.log('WIDTH: '+ windowWidth);
-console.log('HEIGHT: '+ windowHeight);
 
 const WelcomeScreen = props => {
 

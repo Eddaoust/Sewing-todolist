@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {ImageBackground, StyleSheet, Text, View, TextInput, KeyboardAvoidingView, Dimensions, TouchableOpacity} from 'react-native';
+import {ImageBackground, StyleSheet, Text, View, TextInput, KeyboardAvoidingView, Dimensions, TouchableOpacity, Platform} from 'react-native';
 import {useForm, Controller} from 'react-hook-form';
 import { useHeaderHeight } from '@react-navigation/stack';
 import TidyButton from '../../components/TidyButton';
@@ -14,7 +14,7 @@ const LoginScreen = props => {
     const onSubmit = data => console.log(data);
     const headerHeight = useHeaderHeight();
     //TODO Implement this logic with API call
-    const [loginError, setLoginError] = useState(true);
+    const [loginError, setLoginError] = useState(false);
 
     const titlePosition = {
         paddingTop:  windowHeight <= 685 ? (40 - headerHeight) : (100 - headerHeight)
@@ -22,7 +22,7 @@ const LoginScreen = props => {
 
     return (
         <KeyboardAvoidingView
-            behavior="padding"
+            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
             keyboardVerticalOffset={0}
             style={styles.container}>
             <ImageBackground
@@ -61,17 +61,17 @@ const LoginScreen = props => {
                         secureTextEntry={true}
                         style={styles.input}/>
                     {loginError && <InputErrorMessage message='Login ou mot de passe incorrect'/>}
-                </View>
-                <View style={styles.btnContainer}>
-                    <TidyButton
-                        label="SE CONNECTER"
-                        onPress={handleSubmit(onSubmit)}/>
-                    <View style={styles.forgotPassword}>
-                        <TouchableOpacity
-                            activeOpacity={0.6}
-                            onPress={() => {}}>
-                            <Text style={styles.forgotPasswordText}>Mot de passe oublié?</Text>
-                        </TouchableOpacity>
+                    <View style={styles.btnContainer}>
+                        <TidyButton
+                            label="SE CONNECTER"
+                            onPress={handleSubmit(onSubmit)}/>
+                        <View style={styles.forgotPassword}>
+                            <TouchableOpacity
+                                activeOpacity={0.6}
+                                onPress={() => {}}>
+                                <Text style={styles.forgotPasswordText}>Mot de passe oublié?</Text>
+                            </TouchableOpacity>
+                        </View>
                     </View>
                 </View>
             </ImageBackground>
@@ -89,16 +89,17 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     title: {
-        flex: 2,
+        flex: 1,
         textAlign: 'center',
         fontFamily: 'josefin-sans-semi-bold',
         fontSize: 33,
+        color: '#35433A'
     },
     inputContainer: {
-        flex: 2,
+        flex: 3,
         width: windowWidth * 0.8,
         justifyContent: 'flex-start',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     input: {
         width: '100%',
@@ -114,7 +115,8 @@ const styles = StyleSheet.create({
     },
     btnContainer: {
         flex: 1,
-        alignItems: 'center'
+        alignItems: 'center',
+        marginTop: 10
     },
     forgotPassword: {
       marginTop: 10
