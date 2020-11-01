@@ -41,7 +41,7 @@ const RegistrationScreen = props => {
                             required: 'Ce champ est requis!',
                             pattern: {
                                 value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-                                message: 'Entrez une adresse email valide',
+                                message: 'Entrez une adresse e-mail valide',
                             }
                         }}
                         defaultValue=""
@@ -54,7 +54,7 @@ const RegistrationScreen = props => {
                                 onBlur={onBlur}
                                 onChangeText={value => onChange(value)}
                                 value={value}
-                                placeholder='Adresse email'/>
+                                placeholder='Adresse e-mail'/>
                         )}
                     />
                     {errors.email && <InputErrorMessage message={errors.email.message}/>}

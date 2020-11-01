@@ -24,7 +24,7 @@ const LoginChoiceScreen = props => {
     const renderContent = () => (
         <View style={styles.modalBody}>
             <TidyButton
-                label="S'INSCRIRE AVEC UN EMAIL"
+                label="S'INSCRIRE AVEC UN E-MAIL"
                 icon={<Fontisto name="email" size={20} color="white" style={styles.panelBtnIcon} />}
                 onPress={() => props.navigation.navigate('RegistrationScreen')}/>
             <View style={styles.panelBottomTextContainer}>
