@@ -6,7 +6,15 @@ const StockNavigator = props => {
     const StockStack = createStackNavigator();
 
     return (
-        <StockStack.Navigator>
+        <StockStack.Navigator
+            headerMode="screen"
+            screenOptions={{
+                headerTintColor: 'black',
+                headerStyle: {
+                    backgroundColor: '#F4D1D1',
+                    elevation: 0
+                },
+            }}>
             <StockStack.Screen
                 name="StockListScreen"
                 component={StockListScreen}/>
