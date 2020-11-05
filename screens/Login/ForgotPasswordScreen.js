@@ -102,7 +102,12 @@ const styles = StyleSheet.create({
         borderRadius: (windowWidth * 0.8) / 2,
         fontFamily: 'poppins-light',
         marginVertical: 8,
-        backgroundColor: '#fff'
+        backgroundColor: '#fff',
+        shadowColor: 'black',
+        shadowOffset: { width: 3, height: 3 },
+        shadowRadius: 6,
+        shadowOpacity: 0.26,
+        elevation: 8,
     },
     btnContainer: {
         flex: 1,
