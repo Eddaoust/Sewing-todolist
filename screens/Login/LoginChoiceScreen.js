@@ -1,15 +1,18 @@
 import React from 'react';
+import {useDispatch} from "react-redux";
 import {StyleSheet, View, Text, ImageBackground, Image, TouchableOpacity, Dimensions} from 'react-native';
 import SocialButton from "../../components/SocialButton";
 import TidyButton from "../../components/TidyButton";
 import {FontAwesome, Fontisto} from '@expo/vector-icons';
 import Animated from 'react-native-reanimated';
 import BottomSheet from 'reanimated-bottom-sheet';
+import {userAuthOnLogin} from "../../store/actions/login";
 
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 const LoginChoiceScreen = props => {
+    const dispatch = useDispatch();
     const sheetRef = React.useRef(null);
     const fall = new Animated.Value(1);
 
@@ -46,7 +49,7 @@ const LoginChoiceScreen = props => {
                 <Text style={styles.title}>CONNEXION</Text>
                 <View style={styles.actionContainer}>
                     <View style={styles.socialContainer}>
-                        <SocialButton style={styles.fbButton}>
+                        <SocialButton onPress={() => dispatch(userAuthOnLogin('token'))} style={styles.fbButton}>
                             <FontAwesome name="facebook" size={28} color="white" style={{marginTop: 4}} />
                         </SocialButton>
                         <SocialButton style={styles.googleButton}>

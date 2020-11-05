@@ -4,10 +4,12 @@ export default function user(state = {auth: false, accessToken: null, id: null, 
     switch (action.type) {
         case USER_AUTH:
             return {
+                //TODO Remove the dev value
                 auth: true,
-                accessToken: action.data.token,
-                id: action.data.data.id,
-                activated: action.data.data.activated
+                activated: true
+                //accessToken: action.data.token,
+                //id: action.data.data.id,
+                //activated: action.data.data.activated
             };
         default:
             return state;
