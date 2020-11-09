@@ -1,17 +1,19 @@
 import React from 'react';
-import {StyleSheet, View, Text} from 'react-native';
+import {StyleSheet, View, Text, SafeAreaView} from 'react-native';
 
 const StockListScreen = props => {
 
     return (
-        <View>
+        <SafeAreaView style={styles.container}>
             <Text>STOCK LIST</Text>
-        </View>
+        </SafeAreaView>
     );
 };
 
 const styles = StyleSheet.create({
-
+    container: {
+        backgroundColor: '#F4D1D1',
+    }
 });
 
 export default StockListScreen;
