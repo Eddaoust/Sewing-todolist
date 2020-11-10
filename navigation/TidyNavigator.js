@@ -2,6 +2,7 @@ import React from 'react';
 import {createMaterialBottomTabNavigator} from "@react-navigation/material-bottom-tabs";
 import {FontAwesome5, Feather, MaterialIcons} from '@expo/vector-icons';
 import StockNavigator from "./StockNavigator";
+import CustomBottomTapbarIcon from "../components/CustomBottomTapbarIcon";
 
 const TidyNavigator = props => {
     const TidyBottomBar = createMaterialBottomTabNavigator();
@@ -11,37 +12,48 @@ const TidyNavigator = props => {
             labeled={false}
             activeColor="#35433A"
             inactiveColor="#fff"
-            barStyle={{ backgroundColor: '#F4D1D1' }}>
+            barStyle={{
+                backgroundColor: '#f4d1d1',
+                elevation: 5
+            }}>
             <TidyBottomBar.Screen
                 name="NewsFeedNavigator"
                 component={StockNavigator}
                 options={{
-                    tabBarIcon: () => (
-                        <MaterialIcons name="dashboard" size={24} color="#fff" />
+                    tabBarIcon: ({focused, color}) => (
+                        <CustomBottomTapbarIcon
+                            icon={<MaterialIcons name="dashboard" size={24} color={color} />}
+                        />
                     )
                 }}/>
             <TidyBottomBar.Screen
                 name="StockNavigator"
                 component={StockNavigator}
                 options={{
-                    tabBarIcon: () => (
-                    <FontAwesome5 name="store" size={24} color="#fff" />
+                    tabBarIcon: ({focused, color}) => (
+                        <CustomBottomTapbarIcon
+                            icon={<FontAwesome5 name="store" size={20} color={color} />}
+                        />
                     )
                 }}/>
             <TidyBottomBar.Screen
                 name="ShoppingListNavigator"
                 component={StockNavigator}
                 options={{
-                    tabBarIcon: () => (
-                        <Feather name="list" size={24} color="#fff" />
+                    tabBarIcon: ({focused, color}) => (
+                        <CustomBottomTapbarIcon
+                            icon={<Feather name="list" size={24} color={color} />}
+                        />
                     )
                 }}/>
             <TidyBottomBar.Screen
                 name="CreationNavigator"
                 component={StockNavigator}
                 options={{
-                    tabBarIcon: () => (
-                        <FontAwesome5 name="user-alt" size={24} color="#fff" />
+                    tabBarIcon: ({focused, color}) => (
+                        <CustomBottomTapbarIcon
+                            icon={<FontAwesome5 name="user-alt" size={20} color={color} />}
+                        />
                     )
                 }}/>
         </TidyBottomBar.Navigator>
