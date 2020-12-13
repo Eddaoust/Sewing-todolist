@@ -2,7 +2,7 @@ import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import StockListScreen from "../screens/Stock/StockListScreen";
 
-const StockNavigator = props => {
+const StockNavigator = () => {
     const StockStack = createStackNavigator();
 
     return (

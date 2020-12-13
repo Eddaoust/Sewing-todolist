@@ -4,7 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import AuthNavigator from "./AuthNavigator";
 import TidyNavigator from "./TidyNavigator";
 
-const AppNavigator = props => {
+const AppNavigator = () => {
     const user = useSelector(state => state.user);
 
     return (

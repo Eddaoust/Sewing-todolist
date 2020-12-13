@@ -6,7 +6,7 @@ import LoginScreen from "../screens/Login/LoginScreen";
 import RegistrationScreen from "../screens/Login/RegistrationScreen";
 import ForgotPasswordScreen from "../screens/Login/ForgotPasswordScreen";
 
-const AuthNavigator = props => {
+const AuthNavigator = () => {
     const AuthStack = createStackNavigator();
 
     return (

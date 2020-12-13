@@ -2,9 +2,11 @@ import React from 'react';
 import {createMaterialBottomTabNavigator} from "@react-navigation/material-bottom-tabs";
 import {FontAwesome5, Feather, MaterialIcons} from '@expo/vector-icons';
 import StockNavigator from "./StockNavigator";
+import NewsFeedNavigator from "./NewsFeedNavigator";
+import ShoppingListNavigator from "./ShoppingListNavigator";
 import CustomBottomTapbarIcon from "../components/CustomBottomTapbarIcon";
 
-const TidyNavigator = props => {
+const TidyNavigator = () => {
     const TidyBottomBar = createMaterialBottomTabNavigator();
     
     return (
@@ -18,7 +20,7 @@ const TidyNavigator = props => {
             }}>
             <TidyBottomBar.Screen
                 name="NewsFeedNavigator"
-                component={StockNavigator}
+                component={NewsFeedNavigator}
                 options={{
                     tabBarIcon: ({focused, color}) => (
                         <CustomBottomTapbarIcon
@@ -38,7 +40,7 @@ const TidyNavigator = props => {
                 }}/>
             <TidyBottomBar.Screen
                 name="ShoppingListNavigator"
-                component={StockNavigator}
+                component={ShoppingListNavigator}
                 options={{
                     tabBarIcon: ({focused, color}) => (
                         <CustomBottomTapbarIcon
