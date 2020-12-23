@@ -14,9 +14,12 @@ const StockNavigator = () => {
                     backgroundColor: '#F4D1D1',
                     elevation: 0
                 },
+                headerTitleStyle: {
+                    fontFamily: 'josefin-sans'
+                }
             }}>
             <StockStack.Screen
-                name="StockListScreen"
+                name="STOCK"
                 component={StockListScreen}/>
         </StockStack.Navigator>
     );

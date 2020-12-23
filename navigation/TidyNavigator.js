@@ -16,7 +16,7 @@ const TidyNavigator = () => {
             inactiveColor="#fff"
             barStyle={{
                 backgroundColor: '#f4d1d1',
-                elevation: 5
+                elevation: 5,
             }}>
             <TidyBottomBar.Screen
                 name="NewsFeedNavigator"
