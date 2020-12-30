@@ -131,9 +131,9 @@ const styles = StyleSheet.create({
     modalHeader: {
         backgroundColor: '#FFFFFF',
         shadowColor: '#333333',
-        shadowOffset: {width: -1, height: -3},
+        shadowOffset: {width: -1, height: -2},
         shadowRadius: 2,
-        shadowOpacity: 0.4,
+        shadowOpacity: 0.2,
         paddingTop: 20,
         borderTopLeftRadius: 30,
         borderTopRightRadius: 30,
