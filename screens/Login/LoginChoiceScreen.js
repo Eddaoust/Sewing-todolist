@@ -1,11 +1,10 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import {useDispatch} from "react-redux";
 import {StyleSheet, View, Text, ImageBackground, Image, TouchableOpacity, Dimensions} from 'react-native';
+import { Modalize } from 'react-native-modalize';
 import SocialButton from "../../components/SocialButton";
 import TidyButton from "../../components/TidyButton";
 import {FontAwesome, Fontisto} from '@expo/vector-icons';
-import Animated from 'react-native-reanimated';
-import BottomSheet from 'reanimated-bottom-sheet';
 import {userAuthOnLogin} from "../../store/actions/login";
 
 const windowWidth = Dimensions.get('window').width;
@@ -13,33 +12,11 @@ const windowHeight = Dimensions.get('window').height;
 
 const LoginChoiceScreen = props => {
     const dispatch = useDispatch();
-    const sheetRef = React.useRef(null);
-    const fall = new Animated.Value(1);
+    const modalizeRef = useRef(null);
 
-    const renderHeader = () => (
-        <View style={styles.modalHeader}>
-            <View style={styles.modalHeaderPanel}>
-                <View style={styles.modalHeaderHandle} />
-            </View>
-        </View>
-    );
-
-    const renderContent = () => (
-        <View style={styles.modalBody}>
-            <TidyButton
-                label="S'INSCRIRE AVEC UN E-MAIL"
-                icon={<Fontisto name="email" size={20} color="white" style={styles.panelBtnIcon} />}
-                onPress={() => props.navigation.navigate('RegistrationScreen')}/>
-            <View style={styles.panelBottomTextContainer}>
-                <Text style={styles.panelBottomtext}>Déja inscrit(e)? </Text>
-                <TouchableOpacity
-                    activeOpacity={0.6}
-                    onPress={() => props.navigation.navigate('LoginScreen')}>
-                    <Text style={styles.panelBottomLink}>S'identifier</Text>
-                </TouchableOpacity>
-            </View>
-        </View>
-    );
+    const onOpen = () => {
+        modalizeRef.current?.open();
+    };
 
     return (
         <View style={styles.container}>
@@ -61,22 +38,30 @@ const LoginChoiceScreen = props => {
                     </View>
                     <TouchableOpacity
                         activeOpacity={0.6}
-                        onPress={() => sheetRef.current.snapTo(0)}>
+                        onPress={onOpen}>
                         <Text style={styles.options}>AUTRES OPTIONS</Text>
                     </TouchableOpacity>
                 </View>
             </ImageBackground>
-            <BottomSheet
-                ref={sheetRef}
-                snapPoints={[windowHeight * 0.4, 0]}
-                initialSnap={1}
-                callbackNode={fall}
-                enabledGestureInteraction={true}
-                enabledContentTapInteraction={false}
-                enabledInnerScrolling={false}
-                renderContent={renderContent}
-                renderHeader={renderHeader}
-            />
+            <Modalize
+                ref={modalizeRef}
+                disableScrollIfPossible={true}
+                adjustToContentHeight={true}>
+                <View style={styles.modalBody}>
+                    <TidyButton
+                        label="S'INSCRIRE AVEC UN E-MAIL"
+                        icon={<Fontisto name="email" size={20} color="white" style={styles.panelBtnIcon} />}
+                        onPress={() => props.navigation.navigate('RegistrationScreen')}/>
+                    <View style={styles.panelBottomTextContainer}>
+                        <Text style={styles.panelBottomtext}>Déja inscrit(e)? </Text>
+                        <TouchableOpacity
+                            activeOpacity={0.6}
+                            onPress={() => props.navigation.navigate('LoginScreen')}>
+                            <Text style={styles.panelBottomLink}>S'identifier</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            </Modalize>
         </View>
     );
 };
@@ -128,40 +113,10 @@ const styles = StyleSheet.create({
         fontSize: 15,
         marginTop: windowHeight <= 685 ? 20 : 30
     },
-    modalHeader: {
-        backgroundColor: '#FFFFFF',
-        shadowColor: '#333333',
-        shadowOffset: {width: -1, height: -2},
-        shadowRadius: 2,
-        shadowOpacity: 0.2,
-        paddingTop: 20,
-        borderTopLeftRadius: 30,
-        borderTopRightRadius: 30,
-    },
-    modalHeaderPanel: {
-        alignItems: 'center',
-    },
-    modalHeaderHandle: {
-        width: 40,
-        height: 8,
-        borderRadius: 4,
-        backgroundColor: '#00000040',
-        marginBottom: 10,
-    },
     modalBody: {
-        backgroundColor: 'white',
         padding: 16,
-        height: 320,
-        paddingTop: windowHeight <= 685 ? 50 : 75,
-        alignItems: 'center',
-    },
-    panelBtnContainer: {
-        width: '100%',
-        flexDirection: 'row',
-        justifyContent: 'space-evenly',
-        alignItems: 'center',
-        paddingHorizontal: 40,
-        paddingVertical: 20,
+        paddingTop: 50,
+        alignItems: 'center'
     },
     panelBtnIcon: {
         marginTop: -2
@@ -175,7 +130,8 @@ const styles = StyleSheet.create({
     panelBottomTextContainer: {
         flexDirection: 'row',
         justifyContent: 'center',
-        marginTop: 20
+        marginTop: 20,
+        marginBottom: 40
     },
     panelBottomtext:{
         color: '#BEBEBE',
