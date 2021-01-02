@@ -71,8 +71,6 @@ const StockListScreen = ({navigation}) => {
         <StockListItem img={item.img} label={item.name}/>
     );
 
-    const handleSearch = () => console.log('Search');
-    const handleAdd = () => console.log('Add');
     const handleThreeDots = () => console.log('Three dots');
 
     return (
@@ -107,7 +105,10 @@ const StockListScreen = ({navigation}) => {
                         </TouchableOpacity>
                         <TouchableOpacity
                             style={styles.btnContainer}
-                            onPress={() => true}>
+                            onPress={() => {
+                                modalizeRef.current?.close();
+                                navigation.navigate('ProductAddScreen')
+                            }}>
                             <Image
                                 style={styles.modalImg}
                                 source={require('../../assets/produit_icon.png')}/>
