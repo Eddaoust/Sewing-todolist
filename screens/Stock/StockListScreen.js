@@ -1,5 +1,5 @@
 import React, {useLayoutEffect, useRef} from 'react';
-import {StyleSheet, SafeAreaView, FlatList, View, Text, TouchableOpacity, Image} from 'react-native';
+import {StyleSheet, FlatList, View, Text, TouchableOpacity, Image, SafeAreaView} from 'react-native';
 import {Modalize} from 'react-native-modalize';
 import {Portal} from 'react-native-portalize';
 import {AntDesign, MaterialCommunityIcons} from '@expo/vector-icons';
@@ -37,6 +37,7 @@ const categories = [
 ];
 
 //TODO Replace require img by uri from API
+//TODO Prevent Bottom bar to overide list content
 const StockListScreen = ({navigation}) => {
     const dispatch = useDispatch();
     const modalizeRef = useRef(null);
@@ -86,7 +87,8 @@ const StockListScreen = ({navigation}) => {
                 <FlatList
                     data={categories}
                     renderItem={renderItem}
-                    keyExtractor={item => item.id.toString()}/>
+                    keyExtractor={item => item.id.toString()}
+                    showsVerticalScrollIndicator={false}/>
             </View>
             <Portal>
                 <Modalize
@@ -129,7 +131,7 @@ const styles = StyleSheet.create({
         marginBottom: 15
     },
     listContainer: {
-        marginHorizontal: 15
+        paddingHorizontal: 15
     },
     modalBody: {
         padding: 16,
