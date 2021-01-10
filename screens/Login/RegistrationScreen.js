@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {StyleSheet, View, KeyboardAvoidingView, ImageBackground, Text, TextInput, Dimensions, Platform} from 'react-native';
 import {useForm, Controller} from 'react-hook-form';
+import {useDispatch, useSelector} from "react-redux";
 import { useHeaderHeight } from '@react-navigation/stack';
 import InputErrorMessage from '../../components/InputErrorMessage';
 import TidyButton from "../../components/TidyButton";
@@ -9,6 +10,8 @@ const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
 const RegistrationScreen = props => {
+    const dispatch = useDispatch();
+    const registration = useSelector(state => state.registration);
     const headerHeight = useHeaderHeight();
     const { control, handleSubmit, errors } = useForm();
     const [passwordConfirmationError, setPasswordConfirmationError] = useState(false);
@@ -21,7 +24,6 @@ const RegistrationScreen = props => {
     const titlePosition = {
         paddingTop:  windowHeight <= 685 ? (40 - headerHeight) : (100 - headerHeight)
     }
-
     return (
         <KeyboardAvoidingView
             behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
