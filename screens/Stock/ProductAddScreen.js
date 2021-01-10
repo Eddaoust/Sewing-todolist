@@ -1,15 +1,30 @@
 import React, {useState} from 'react';
-import {StyleSheet, View, KeyboardAvoidingView, ImageBackground, Text, TextInput, Dimensions, Platform, ScrollView} from 'react-native';
+import {StyleSheet, View, KeyboardAvoidingView, TouchableOpacity, TextInput, Dimensions, Platform, ScrollView} from 'react-native';
 import {useForm, Controller} from 'react-hook-form';
-import { useHeaderHeight } from '@react-navigation/stack';
-import InputErrorMessage from '../../components/InputErrorMessage';
+import * as ImagePicker from 'expo-image-picker';
+import {Entypo} from '@expo/vector-icons';
 import TidyButton from "../../components/TidyButton";
+import EddstCheckbox from "../../components/EddstCheckbox";
 
 const windowWidth = Dimensions.get('window').width;
 
 const ProductAddScreen = props => {
     const { control, handleSubmit, errors } = useForm();
     const onSubmit = data => console.log(data);
+    const [washedCheckbox, setWachedCheckbox] = useState(false);
+    const [ironedCheckbox, setIronedCheckbox] = useState(false);
+    const handleWashedCheckbox = () => setWachedCheckbox(!washedCheckbox);
+    const handleIronedCheckbox = () => setIronedCheckbox(!ironedCheckbox);
+
+    let openImagePickerAsync = async () => {
+        let permissionResult = await ImagePicker.requestCameraRollPermissionsAsync();
+        if (permissionResult.granted === false) {
+            alert("Permission to access camera roll is required!");
+            return;
+        }
+        let pickerResult = await ImagePicker.launchImageLibraryAsync();
+        console.log(pickerResult);
+    }
 
     return (
         <ScrollView>
@@ -18,6 +33,9 @@ const ProductAddScreen = props => {
                 keyboardVerticalOffset={0}
                 style={styles.container}>
                 <View style={styles.inputContainer}>
+                    <TouchableOpacity style={styles.addImgBtn} onPress={openImagePickerAsync}>
+                        <Entypo name="plus" size={48} color="#fff" />
+                    </TouchableOpacity>
                     <Controller
                         control={control}
                         name="title"
@@ -148,6 +166,10 @@ const ProductAddScreen = props => {
                                 placeholder='Longueur'/>
                         )}
                     />
+                    <View style={styles.checkboxesContainer}>
+                        <EddstCheckbox label="Lavé" checked={washedCheckbox} onPress={() => handleWashedCheckbox()}/>
+                        <EddstCheckbox label="Repassé" checked={ironedCheckbox} onPress={() => handleIronedCheckbox()}/>
+                    </View>
                     <Controller
                         control={control}
                         name="note"
@@ -202,6 +224,22 @@ const styles = StyleSheet.create({
         marginVertical: 8,
         backgroundColor: '#fff',
     },
+    addImgBtn: {
+        borderRadius: 10,
+        backgroundColor: '#E3E3E3',
+        height: 80,
+        marginTop: 16,
+        marginBottom: 8,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    checkboxesContainer: {
+        flexDirection: 'row',
+        alignItems: 'center'
+    },
+    btnContainer: {
+        marginVertical: 20
+    }
 });
 
 export default ProductAddScreen;
