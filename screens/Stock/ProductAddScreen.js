@@ -5,17 +5,19 @@ import * as ImagePicker from 'expo-image-picker';
 import {Entypo} from '@expo/vector-icons';
 import TidyButton from "../../components/TidyButton";
 import EddstCheckbox from "../../components/EddstCheckbox";
+import InputErrorMessage from "../../components/InputErrorMessage";
 
 const windowWidth = Dimensions.get('window').width;
 
 const ProductAddScreen = props => {
     const { control, handleSubmit, errors } = useForm();
-    const onSubmit = data => console.log(data);
     const [washedCheckbox, setWachedCheckbox] = useState(false);
     const [ironedCheckbox, setIronedCheckbox] = useState(false);
     const handleWashedCheckbox = () => setWachedCheckbox(!washedCheckbox);
     const handleIronedCheckbox = () => setIronedCheckbox(!ironedCheckbox);
-
+    const onSubmit = data => {
+        console.log(data);
+    };
     let openImagePickerAsync = async () => {
         let permissionResult = await ImagePicker.requestCameraRollPermissionsAsync();
         if (permissionResult.granted === false) {
@@ -23,7 +25,6 @@ const ProductAddScreen = props => {
             return;
         }
         let pickerResult = await ImagePicker.launchImageLibraryAsync();
-        console.log(pickerResult);
     }
 
     return (
@@ -54,12 +55,10 @@ const ProductAddScreen = props => {
                                 placeholder='Titre'/>
                         )}
                     />
+                    {errors.title && <InputErrorMessage message={errors.title.message}/>}
                     <Controller
                         control={control}
                         name="description"
-                        rules={{
-                            required: 'Ce champ est requis!',
-                        }}
                         defaultValue=""
                         render={({onChange, onBlur, value}) => (
                             <TextInput
@@ -79,9 +78,6 @@ const ProductAddScreen = props => {
                     <Controller
                         control={control}
                         name="mater"
-                        rules={{
-                            required: 'Ce champ est requis!',
-                        }}
                         defaultValue=""
                         render={({onChange, onBlur, value}) => (
                             <TextInput
@@ -97,9 +93,6 @@ const ProductAddScreen = props => {
                     <Controller
                         control={control}
                         name="color"
-                        rules={{
-                            required: 'Ce champ est requis!',
-                        }}
                         defaultValue=""
                         render={({onChange, onBlur, value}) => (
                             <TextInput
@@ -115,9 +108,6 @@ const ProductAddScreen = props => {
                     <Controller
                         control={control}
                         name="motif"
-                        rules={{
-                            required: 'Ce champ est requis!',
-                        }}
                         defaultValue=""
                         render={({onChange, onBlur, value}) => (
                             <TextInput
@@ -133,9 +123,6 @@ const ProductAddScreen = props => {
                     <Controller
                         control={control}
                         name="largeur"
-                        rules={{
-                            required: 'Ce champ est requis!',
-                        }}
                         defaultValue=""
                         render={({onChange, onBlur, value}) => (
                             <TextInput
@@ -151,9 +138,6 @@ const ProductAddScreen = props => {
                     <Controller
                         control={control}
                         name="longueur"
-                        rules={{
-                            required: 'Ce champ est requis!',
-                        }}
                         defaultValue=""
                         render={({onChange, onBlur, value}) => (
                             <TextInput
@@ -173,9 +157,6 @@ const ProductAddScreen = props => {
                     <Controller
                         control={control}
                         name="note"
-                        rules={{
-                            required: 'Ce champ est requis!',
-                        }}
                         defaultValue=""
                         render={({onChange, onBlur, value}) => (
                             <TextInput
@@ -195,7 +176,7 @@ const ProductAddScreen = props => {
                     <View style={styles.btnContainer}>
                         <TidyButton
                             label='ENREGISTRER'
-                            onPress={() => true}/>
+                            onPress={handleSubmit(onSubmit)}/>
                     </View>
                 </View>
             </KeyboardAvoidingView>

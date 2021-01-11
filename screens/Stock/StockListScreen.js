@@ -97,7 +97,10 @@ const StockListScreen = ({navigation}) => {
                         <Text style={styles.modalTitle}>AJOUTER</Text>
                         <TouchableOpacity
                             style={styles.btnContainer}
-                            onPress={() => true}>
+                            onPress={() => {
+                                modalizeRef.current?.close();
+                                navigation.navigate('MainCategoryAddScreen')
+                            }}>
                             <Image
                                 style={styles.modalImg}
                                 source={require('../../assets/categorie_icon.png')}/>

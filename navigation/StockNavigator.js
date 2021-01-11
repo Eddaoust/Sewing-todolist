@@ -2,6 +2,7 @@ import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import StockListScreen from "../screens/Stock/StockListScreen";
 import ProductAddScreen from "../screens/Stock/ProductAddScreen";
+import MainCategoryAddScreen from "../screens/Stock/MainCategoryAddScreen";
 
 const StockNavigator = () => {
     const StockStack = createStackNavigator();
@@ -27,6 +28,10 @@ const StockNavigator = () => {
                 name="ProductAddScreen"
                 component={ProductAddScreen}
                 options={{ title: 'AJOUTER UN PRODUIT' }}/>
+            <StockStack.Screen
+                name="MainCategoryAddScreen"
+                component={MainCategoryAddScreen}
+                options={{ title: 'AJOUTER UNE CATÉGORIE' }}/>
         </StockStack.Navigator>
     );
 };
