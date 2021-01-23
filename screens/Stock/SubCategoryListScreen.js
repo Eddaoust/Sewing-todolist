@@ -4,22 +4,22 @@ import {Modalize} from 'react-native-modalize';
 import {Portal} from 'react-native-portalize';
 import {AntDesign, MaterialCommunityIcons} from '@expo/vector-icons';
 import {useDispatch} from "react-redux";
-import StockListItem from "../../components/StockListItem";
 import HeaderIcon from "../../components/HeaderIcon";
 import SearchBar from "../../components/SearchBar";
+import StockListSubitem from "../../components/StockListSubItem";
 
 const categories = [
     {
         id: 1,
-        name: 'Mercerie',
+        name: 'Coton',
         img: require('../../assets/stock_1.jpg')
     }, {
         id: 2,
-        name: 'Patrons',
+        name: 'Dentelle',
         img: require('../../assets/stock_2.jpg')
     }, {
         id: 3,
-        name: 'Tissus',
+        name: 'Jean',
         img: require('../../assets/stock_3.jpg')
     }, {
         id: 4,
@@ -27,18 +27,16 @@ const categories = [
         img: require('../../assets/stock_4.jpg')
     }, {
         id: 5,
-        name: 'Mercerie',
+        name: 'Lin',
         img: require('../../assets/stock_1.jpg')
     }, {
         id: 6,
-        name: 'Patrons',
+        name: 'Soie',
         img: require('../../assets/stock_2.jpg')
     }
 ];
 
-//TODO Replace require img by uri from API
-//TODO Prevent Bottom bar to overide list content
-const StockListScreen = ({navigation}) => {
+const SubcategoryListScreen = ({navigation}) => {
     const dispatch = useDispatch();
     const modalizeRef = useRef(null);
 
@@ -56,7 +54,7 @@ const StockListScreen = ({navigation}) => {
                 }}>
                     <HeaderIcon
                         icon={<MaterialCommunityIcons name="dots-horizontal" size={20} color="black" />}
-                        onPress={handleThreeDots}
+                        onPress={() => true}
                     />
                     <HeaderIcon
                         icon={<AntDesign name="plus" size={20} color="black" />}
@@ -68,10 +66,9 @@ const StockListScreen = ({navigation}) => {
     }, [navigation])
 
     const renderItem = ({item}) => (
-        <StockListItem img={item.img} label={item.name} onPress={() => navigation.navigate('SubcategoryListScreen')}/>
+        <StockListSubitem img={item.img} label={item.name} onPress={() => true}/>
     );
 
-    const handleThreeDots = () => console.log('Three dots');
 
     return (
         <SafeAreaView style={styles.container}>
@@ -99,18 +96,16 @@ const StockListScreen = ({navigation}) => {
                             style={styles.btnContainer}
                             onPress={() => {
                                 modalizeRef.current?.close();
-                                navigation.navigate('MainCategoryAddScreen')
                             }}>
                             <Image
                                 style={styles.modalImg}
                                 source={require('../../assets/categorie_icon.png')}/>
-                            <Text style={styles.modalText}>Catégorie</Text>
+                            <Text style={styles.modalText}>Sous-Catégorie</Text>
                         </TouchableOpacity>
                         <TouchableOpacity
                             style={styles.btnContainer}
                             onPress={() => {
                                 modalizeRef.current?.close();
-                                navigation.navigate('ProductAddScreen')
                             }}>
                             <Image
                                 style={styles.modalImg}
@@ -168,4 +163,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default StockListScreen;
+export default SubcategoryListScreen;

@@ -3,7 +3,7 @@ import {StyleSheet, Text, TouchableOpacity, ImageBackground, Dimensions} from 'r
 
 const windowWidth = Dimensions.get('window').width;
 
-const StockListItem = props => {
+const StockListSubitem = props => {
 
     return (
         <TouchableOpacity style={styles.btn} onPress={props.onPress}>
@@ -18,7 +18,7 @@ const StockListItem = props => {
 
 const styles = StyleSheet.create({
     btn: {
-        height: 120,
+        height: 80,
         shadowColor: 'black',
         shadowOffset: { width: 3, height: 3 },
         shadowRadius: 6,
@@ -35,15 +35,15 @@ const styles = StyleSheet.create({
     },
     txt: {
         color: 'white',
-        fontSize: 36,
-        textAlign: 'center',
-        fontFamily: 'josefin-sans-semi-bold',
+        fontSize: 31,
+        textAlign: 'left',
+        fontFamily: 'josefin-sans-light',
         textTransform: 'uppercase',
-        paddingHorizontal: 5,
+        paddingHorizontal: 15,
         textShadowColor: 'rgba(0, 0, 0, 0.5)',
         textShadowOffset: {width: -1, height: 1},
         textShadowRadius: 10
     }
 });
 
-export default StockListItem;
+export default StockListSubitem;
